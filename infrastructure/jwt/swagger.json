@@ -1,0 +1,29 @@
+{
+  "swagger": "2.0",
+  "paths": {},
+  "definitions": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "Email": {
+          "type": "string"
+        },
+        "ID": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        }
+      },
+      "x-go-name": "User",
+      "x-go-package": "github.com/kustavo/benchmark/go/domain/model"
+    }
+  }
+}

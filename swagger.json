@@ -1,0 +1,368 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "Starting my first API in Golang",
+    "title": "Learning Golang",
+    "termsOfService": "there are no TOS at this moment, use at your own risk we take no responsibility",
+    "contact": {
+      "name": "Gustavo Araújo",
+      "email": "kustavo@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    },
+    "version": "0.0.1"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "paths": {
+    "/login": {
+      "post": {
+        "security": [],
+        "description": "This will create the auth and refresh tokens",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "user"
+        ],
+        "summary": "Authenticate",
+        "operationId": "login",
+        "parameters": [
+          {
+            "description": "example parameters",
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/responseMessage"
+            }
+          }
+        }
+      }
+    },
+    "/logout": {
+      "post": {
+        "description": "This will delete the auth and refresh tokens",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "user"
+        ],
+        "summary": "Logout",
+        "operationId": "logout",
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/responseMessage"
+            }
+          }
+        }
+      }
+    },
+    "/refresh-auth": {
+      "post": {
+        "description": "This will creates the new auth and refresh tokens and delete the old ones",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "user"
+        ],
+        "summary": "Refresh auth",
+        "operationId": "refresh-auth",
+        "parameters": [
+          {
+            "description": "token",
+            "name": "token",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/tokenDTO"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/responseMessage"
+            }
+          }
+        }
+      }
+    },
+    "/user/": {
+      "post": {
+        "description": "This will create a new user",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "user"
+        ],
+        "summary": "Create new user",
+        "operationId": "create",
+        "parameters": [
+          {
+            "description": "example parameters",
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/responseMessage"
+            }
+          }
+        }
+      }
+    },
+    "/user/get-by-email": {
+      "get": {
+        "description": "This will get a user by email",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user by email",
+        "operationId": "getByEmail",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "user email",
+            "name": "email",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/responseMessage"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "description": "This will get a user by id",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user by id",
+        "operationId": "getById",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "user id",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/responseMessage"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "This will update a user",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "user"
+        ],
+        "summary": "Update a user",
+        "operationId": "update",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "user id",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "example parameters",
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/responseMessage"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "This will delete a user",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete user",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "user id",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/responseMessage"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Base": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "ID"
+        }
+      },
+      "x-go-package": "github.com/kustavo/benchmark/go/domain/model"
+    },
+    "responseMessage": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "x-go-name": "Data"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "Errors"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "Messages"
+        }
+      },
+      "x-go-package": "github.com/kustavo/benchmark/go/infrastructure/http"
+    },
+    "tokenDTO": {
+      "type": "object",
+      "properties": {
+        "Token": {
+          "type": "string"
+        }
+      },
+      "x-go-name": "TokenDTO",
+      "x-go-package": "github.com/kustavo/benchmark/go/application/dto"
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "x-go-name": "Email"
+        },
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "ID"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "password": {
+          "type": "string",
+          "x-go-name": "Password"
+        },
+        "username": {
+          "type": "string",
+          "x-go-name": "Username"
+        }
+      },
+      "x-go-name": "User",
+      "x-go-package": "github.com/kustavo/benchmark/go/domain/model"
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "Bearer": [
+        "[]"
+      ]
+    },
+    {
+      "tryItOutEnabled": [
+        "true"
+      ]
+    }
+  ]
+}
